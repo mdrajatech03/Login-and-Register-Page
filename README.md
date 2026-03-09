@@ -31,9 +31,8 @@ A lightweight, responsive, and user-friendly authentication interface. This proj
 ![Project Preview](login.jpg)
 *(Replace this with a screenshot of your actual page for a better impact!)*
 
-## ⚙️ Installation & Usage
+## 👨‍💻 Author
 
-1. **Clone the repository:**
-   ```bash
-   git clone [https://github.com/mdrajatech03/Login-and-Register-Page.git](https://github.com/mdrajatech03/Login-and-Register-Page.git)
-   # Login-and-Register-Page
+**Rajatech**
+
+GitHub: https://github.com/mdrajatech03
