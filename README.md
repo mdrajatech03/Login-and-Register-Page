@@ -4,7 +4,7 @@ A lightweight, responsive, and user-friendly authentication interface. This proj
 
 ## 🌐 Live Demo
 
-[🚀 Click Here to Use Calculator](https://mdrajatech03.github.io/Login-and-Register-Page/)
+[🚀 Click Here to Use Login and Register Page](https://mdrajatech03.github.io/Login-and-Register-Page/)
 ## 🚀 Key Features
 
 * **Responsive Layout:** Fully optimized for tablet and desktop screens using CSS Flexbox/Grid.
