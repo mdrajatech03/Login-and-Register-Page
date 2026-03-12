@@ -43,7 +43,7 @@ header {
 /* MOBILE RESPONSIVE CODE (MAIN FIX) */
 @media (max-width: 768px) {
     header { padding: 15px 5%; flex-direction: column; height: auto; }
-    .navigation { margin-top: 15px; display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; }
+    .navigation { margin-top: 15px; display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; }
     .navigation a { margin-left: 0; font-size: 0.9em; }
     .btnLogin-popup { margin-left: 0; width: 80px; height: 35px; font-size: 0.8em; }
 
@@ -53,4 +53,5 @@ header {
     .wrapper.active .form-container { transform: translateX(-50%); }
     .form-box h2 { font-size: 1.5em; }
 }
+
 
