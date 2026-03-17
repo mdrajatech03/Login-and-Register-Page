@@ -129,3 +129,24 @@ document.querySelectorAll('.toggle-password').forEach(icon => {
         }
     };
 });
+
+
+// 9. Route Protection: Check if user is logged in
+import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+
+onAuthStateChanged(auth, (user) => {
+    const currentPage = window.location.pathname;
+
+    // Agar user login nahi hai aur wo index.html par hai
+    if (!user && currentPage.includes("index.html")) {
+        showToast('warning', 'Pehle Login karein!');
+        setTimeout(() => {
+            window.location.href = "login.html"; // Login page ka sahi naam likhein
+        }, 2000);
+    } 
+    // Agar user login hai aur wo galti se login page par hai
+    else if (user && (currentPage.includes("login.html") || currentPage === "/")) {
+        window.location.href = "index.html";
+    }
+});
+
