@@ -70,6 +70,34 @@ registerForm.addEventListener('submit', async (e) => {
         wrapper.classList.remove('active');
     } catch (error) {
         alert("Registration Error: " + error.message);
+      // ... existing code ...
+    } catch (error) {
+        // Purana alert code
+        // alert("Registration Error: " + error.message);
+
+        // Naya SweetAlert Toast Logic
+        const showToast = (icon, title) => {
+            const Toast = Swal.mixin({
+                toast: true,
+                position: 'top-end',
+                showConfirmButton: false,
+                timer: 3000,
+                timerProgressBar: true,
+            });
+            Toast.fire({ icon, title });
+        };
+
+        const errorCode = error.code;
+        if (errorCode === 'auth/invalid-credential') {
+            showToast('error', 'Galat Email ya Password!');
+        } else if (errorCode === 'auth/invalid-email') {
+            showToast('warning', 'Email ka format sahi nahi hai!');
+        } else {
+            showToast('error', 'Kuch gadbad hui!');
+        }
+    }
+// ... rest of the code ...
+                              
     }
 });
 
