@@ -3,40 +3,179 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Raja Tech - Portfolio</title>
+    <title>RajaTech | Professional Portfolio</title>
     
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <link rel="stylesheet" href="style.css">
     
     <style>
-        body { background-color: #161922; font-family: 'Poppins', sans-serif; color: white; text-align: center; }
-        .header { display: flex; justify-content: space-around; align-items: center; background: #000; padding: 15px; position: fixed; top: 0; width: 100%; z-index: 1000; }
-        .profile-card { margin-top: 120px; background: #1f232d; padding: 30px; border-radius: 15px; display: inline-block; border: 1px solid #00f2fe; }
-        #userDP { width: 120px; height: 120px; border-radius: 50%; border: 3px solid #00f2fe; object-fit: cover; margin-bottom: 15px; }
-        .input-group { margin-top: 20px; }
-        input { padding: 10px; border-radius: 5px; border: none; width: 250px; }
+        /* --- CSS VARIABLES --- */
+        :root {
+            --primary-color: #00f2fe;
+            --secondary-color: #4facfe;
+            --bg-dark: #0f172a;
+            --card-bg: rgba(30, 41, 59, 0.7);
+            --text-main: #f8fafc;
+        }
+
+        /* --- RESET & BASE --- */
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+        body { 
+            background: radial-gradient(circle at top right, #1e293b, #0f172a);
+            color: var(--text-main);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* --- HEADER (Professional Navbar) --- */
+        .header {
+            width: 100%;
+            padding: 20px 5%;
+            display: flex;
+            justify-content: space-between; /* RAJATECH Left, Logout Right */
+            align-items: center;
+            background: rgba(15, 23, 42, 0.8);
+            backdrop-filter: blur(10px);
+            position: fixed;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        #btnLogout {
+            padding: 10px 25px;
+            background: transparent;
+            border: 2px solid var(--primary-color);
+            color: var(--primary-color);
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        #btnLogout:hover {
+            background: var(--primary-color);
+            color: #000;
+            box-shadow: 0 0 20px rgba(0, 242, 254, 0.4);
+        }
+
+        /* --- PROFILE SECTION --- */
+        .main-container {
+            margin-top: 120px;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        .profile-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 40px;
+            border-radius: 24px;
+            text-align: center;
+            max-width: 500px;
+            width: 90%;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        #userDP {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            border: 4px solid var(--primary-color);
+            object-fit: cover;
+            margin-bottom: 20px;
+            box-shadow: 0 0 25px rgba(0, 242, 254, 0.2);
+        }
+
+        #welcomeMessage { font-size: 2rem; margin-bottom: 10px; font-weight: 600; }
+        #userEmailDisplay { color: #94a3b8; margin-bottom: 30px; font-weight: 300; }
+
+        /* --- INPUT GROUP --- */
+        .input-group {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            align-items: center;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 12px 20px;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.05);
+            color: white;
+            outline: none;
+            transition: 0.3s;
+        }
+
+        input[type="text"]:focus { border-color: var(--primary-color); background: rgba(255, 255, 255, 0.1); }
+
+        #btnUpdatePhoto {
+            width: 100%;
+            padding: 12px;
+            border-radius: 12px;
+            border: none;
+            background: linear-gradient(135deg, var(--secondary-color), var(--primary-color));
+            color: #000;
+            font-weight: 700;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        #btnUpdatePhoto:active { transform: scale(0.98); }
+
+        /* --- RESPONSIVE DESIGN --- */
+        @media (max-width: 768px) {
+            .header { padding: 15px 5%; }
+            .logo { font-size: 1.4rem; }
+            #welcomeMessage { font-size: 1.5rem; }
+            .profile-card { padding: 30px 20px; }
+        }
     </style>
 </head>
 <body>
 
     <header class="header">
-        <h2>RAJATECH</h2>
-        <button id="btnLogout" class="btn">Logout</button>
+        <div class="logo">RAJATECH</div>
+        <button id="btnLogout">Logout</button>
     </header>
 
-    <div class="profile-card">
-        <img id="userDP" src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" alt="Profile">
-        <h1 id="welcomeMessage">Loading...</h1>
-        <p id="userEmailDisplay">---</p>
+    <div class="main-container">
+        <div class="profile-card">
+            <img id="userDP" src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" alt="Profile">
+            
+            <h1 id="welcomeMessage">Profile Loading...</h1>
+            <p id="userEmailDisplay">Connecting to database...</p>
 
-        <div class="input-group">
-            <input type="text" id="photoURLInput" placeholder="Paste Image URL here">
-            <button id="btnUpdatePhoto" class="btn" style="padding: 10px;">Update Photo</button>
+            <div class="input-group">
+                <input type="text" id="photoURLInput" placeholder="Enter Image URL to Update Profile">
+                <button id="btnUpdatePhoto">UPDATE PROFILE PICTURE</button>
+            </div>
         </div>
-    </div>
 
-    <div style="margin-top: 50px;">
-        <h3>Project Status: Back-End Integrated!</h3>
+        <p style="margin-top: 40px; color: #64748b; font-size: 0.9rem;">
+            &copy; 2026 RajaTech Professional - All Rights Reserved
+        </p>
     </div>
 
     <script type="module" src="script.js"></script>
