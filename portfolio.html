@@ -3,32 +3,64 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard | RAJA TECH</title>
+    <title>Dashboard | RAJATECH</title>
     <link rel="stylesheet" href="style.css">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <style>
+        .dash-wrapper { padding: 100px 20px; display: flex; justify-content: center; }
+        .glass-card { 
+            background: rgba(255, 255, 255, 0.05); 
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 25px;
+            width: 100%; max-width: 450px;
+            padding: 40px 20px; text-align: center;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+        }
+        .profile-img { 
+            width: 120px; height: 120px; border-radius: 50%; 
+            border: 3px solid #00f2fe; object-fit: cover;
+            margin-bottom: 20px; box-shadow: 0 0 20px rgba(0,242,254,0.3);
+        }
+        .user-meta h2 { color: #fff; font-size: 1.8rem; margin-bottom: 5px; }
+        .user-meta p { color: #94a3b8; font-size: 0.9rem; margin-bottom: 30px; }
+        .status-badge { 
+            background: #00f2fe; color: #0f172a; 
+            padding: 5px 15px; border-radius: 20px; 
+            font-weight: 700; font-size: 0.75rem; 
+            display: inline-block; margin-bottom: 20px;
+        }
+        .btn-logout-dash {
+            width: 100%; padding: 12px; background: transparent;
+            border: 2px solid #ff4757; color: #ff4757;
+            border-radius: 10px; font-weight: 600; cursor: pointer;
+            transition: 0.3s; margin-top: 20px;
+        }
+        .btn-logout-dash:hover { background: #ff4757; color: #fff; }
+    </style>
 </head>
-<body class="dashboard-body">
-    <header class="header-fixed">
-        <h2 class="logo">RAJATECH</h2>
-        <button id="btnLogout" class="btn-outline">Logout</button>
+<body style="flex-direction: column; justify-content: flex-start;">
+
+    <header class="main-header">
+        <h2 class="logo">RAJA<span>TECH</span></h2>
+        <button id="btnLogout" class="btnLogin-popup">Logout</button>
     </header>
 
-    <main class="container">
-        <div class="profile-card animate-pop">
-            <div class="avatar-container">
-                <img id="userDP" src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" alt="User">
+    <div class="dash-wrapper">
+        <div class="glass-card">
+            <span class="status-badge">VERIFIED DEVELOPER</span>
+            <div class="profile-box">
+                <img id="userDP" src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" class="profile-img">
             </div>
-            <h1 id="welcomeUser">Loading...</h1>
-            <p id="userEmail">Fetching details...</p>
-            <div class="user-stats">
-                <div class="stat"><span>UID:</span> <small id="userIdDisplay">---</small></div>
+            <div class="user-meta">
+                <h2 id="userName">User Name</h2>
+                <p id="userEmail">user@example.com</p>
             </div>
-            <div class="update-section">
-                <input type="text" id="photoURL" placeholder="Paste Image URL here">
-                <button id="btnUpdate" class="btn">Update Profile</button>
-            </div>
+            <hr style="border: 0; border-top: 1px solid rgba(255,255,255,0.1); margin: 20px 0;">
+            <p style="color: #64748b; font-size: 0.8rem;">Welcome to RAJATECH Premium Ecosystem. Your account is fully secured.</p>
+            <button onclick="location.reload()" class="btn-main" style="margin-top: 20px;">Refresh Stats</button>
         </div>
-    </main>
+    </div>
 
     <script type="module" src="script.js"></script>
 </body>
