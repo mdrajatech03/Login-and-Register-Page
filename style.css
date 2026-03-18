@@ -3,56 +3,70 @@
 * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
 
 body {
-    display: flex; justify-content: center; align-items: center;
-    min-height: 100vh; background: #050816; overflow: hidden; color: #fff;
-}
-
-/* Background Animation */
-.background-animate {
-    position: absolute; width: 100%; height: 100%;
-    background: linear-gradient(45deg, #050816, #1a1a2e);
-    z-index: -1;
+    display: flex; justify-content: center; align-items: center; min-height: 100vh;
+    background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); overflow: hidden;
 }
 
 header {
-    position: fixed; top: 0; left: 0; width: 100%; padding: 20px 100px;
-    display: flex; justify-content: space-between; align-items: center; z-index: 99;
+    position: fixed; top: 0; left: 0; width: 100%; padding: 20px 10%;
+    display: flex; justify-content: space-between; align-items: center; z-index: 100;
+    background: rgba(15, 23, 42, 0.8); backdrop-filter: blur(10px);
 }
 
-.logo { font-size: 2em; color: #00f2fe; user-select: none; }
+.logo { font-size: 1.8rem; color: #fff; letter-spacing: 1px; }
+.logo span { color: #00f2fe; }
 
+.navigation a { color: #fff; text-decoration: none; margin-left: 30px; font-weight: 500; transition: .3s; }
+.navigation a:hover { color: #00f2fe; }
+
+.btnLogin-popup {
+    width: 120px; height: 45px; background: transparent; border: 2px solid #fff;
+    border-radius: 10px; color: #fff; font-weight: 600; cursor: pointer; margin-left: 40px; transition: .4s;
+}
+.btnLogin-popup:hover { background: #fff; color: #0f172a; }
+
+/* Wrapper - Popup Design */
 .wrapper {
-    position: relative; width: 400px; height: 440px;
-    background: rgba(255, 255, 255, 0.1); border: 2px solid rgba(255, 255, 255, 0.2);
-    border-radius: 20px; backdrop-filter: blur(20px);
-    display: flex; justify-content: center; align-items: center;
-    transition: transform .5s ease, height .2s ease; overflow: hidden; transform: scale(0);
+    position: relative; width: 420px; height: 460px; background: rgba(255, 255, 255, 0.1);
+    border: 2px solid rgba(255, 255, 255, 0.2); border-radius: 25px; backdrop-filter: blur(25px);
+    display: flex; justify-content: center; align-items: center; transition: .5s ease;
+    transform: scale(0); box-shadow: 0 0 40px rgba(0,0,0,0.5);
 }
-
 .wrapper.active-popup { transform: scale(1); }
-.wrapper.active { height: 520px; }
+.wrapper.active { height: 540px; }
 
-.form-box { width: 100%; padding: 40px; }
-.form-box.register { position: absolute; transform: translateX(400px); transition: .18s ease; }
-.wrapper.active .form-box.login { transform: translateX(-400px); transition: none; }
-.wrapper.active .form-box.register { transform: translateX(0); transition: .18s ease; }
+.form-box { width: 100%; padding: 45px; transition: .2s ease; }
+.form-box.register { position: absolute; transform: translateX(420px); }
+.wrapper.active .form-box.login { transform: translateX(-420px); opacity: 0; }
+.wrapper.active .form-box.register { transform: translateX(0); opacity: 1; }
 
-.input-box { position: relative; width: 100%; height: 50px; border-bottom: 2px solid #fff; margin: 30px 0; }
-.input-box input { width: 100%; height: 100%; background: transparent; border: none; outline: none; color: #fff; padding-right: 28px; }
-.input-box label { position: absolute; top: 50%; left: 0; transform: translateY(-50%); transition: .5s; pointer-events: none; }
-.input-box input:focus~label, .input-box input:valid~label { top: -5px; }
-
-.btn { width: 100%; height: 45px; background: #00f2fe; border: none; border-radius: 6px; cursor: pointer; font-size: 1em; font-weight: 600; color: #050816; transition: .3s; }
-.btn:hover { background: #fff; box-shadow: 0 0 15px #00f2fe; }
-
-/* Dashboard Styles */
-.profile-card {
-    background: rgba(255, 255, 255, 0.05); padding: 40px; border-radius: 30px;
-    border: 1px solid rgba(255, 255, 255, 0.1); text-align: center; width: 400px;
-    animation: pop .5s ease-out;
+.icon-close {
+    position: absolute; top: 0; right: 0; width: 45px; height: 45px; background: #00f2fe;
+    display: flex; justify-content: center; align-items: center; border-radius: 0 20px 0 20px;
+    font-size: 25px; color: #0f172a; cursor: pointer; z-index: 1;
 }
-.avatar-container { width: 120px; height: 120px; margin: 0 auto 20px; border-radius: 50%; border: 3px solid #00f2fe; overflow: hidden; }
-#userDP { width: 100%; height: 100%; object-fit: cover; }
-@keyframes pop { from { transform: scale(0.8); opacity: 0; } to { transform: scale(1); opacity: 1; } }
 
-.btn-outline { padding: 10px 25px; border: 2px solid #00f2fe; background: transparent; color: #00f2fe; border-radius: 50px; cursor: pointer; }
+h2 { font-size: 2rem; color: #fff; text-align: center; margin-bottom: 20px; }
+
+/* Input Fix - Text line ke beech nahi aayega */
+.input-box { position: relative; width: 100%; height: 55px; border-bottom: 2px solid #00f2fe; margin: 25px 0; }
+.input-box label { position: absolute; top: 50%; left: 5px; transform: translateY(-50%); color: #fff; pointer-events: none; transition: .4s; }
+.input-box input { width: 100%; height: 100%; background: transparent; border: none; outline: none; font-size: 1rem; color: #fff; padding: 0 35px 0 5px; }
+
+/* Label animation fix */
+.input-box input:focus~label, .input-box input:valid~label { top: -5px; color: #00f2fe; font-size: 0.85rem; }
+
+.icon { position: absolute; right: 8px; font-size: 1.2rem; color: #fff; line-height: 57px; }
+
+/* Professional Button CSS */
+.btn-main {
+    width: 100%; height: 50px; background: #00f2fe; border: none; outline: none;
+    border-radius: 12px; cursor: pointer; font-size: 1.1rem; color: #0f172a;
+    font-weight: 700; transition: .3s; margin-top: 15px;
+}
+.btn-main:hover { background: #fff; box-shadow: 0 0 20px #00f2fe; transform: translateY(-2px); }
+
+.login-register { font-size: .9rem; color: #fff; text-align: center; margin: 25px 0 10px; }
+.login-register p a { color: #00f2fe; text-decoration: none; font-weight: 600; }
+.login-register p a:hover { text-decoration: underline; }
+    
