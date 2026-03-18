@@ -15,21 +15,22 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app);
 
-const wrapper = document.querySelector('.wrapper');
-const btnPopup = document.querySelector('.btnLogin-popup');
-const iconClose = document.querySelector('.icon-close');
-const registerLink = document.querySelector('.register-link');
-const loginLink = document.querySelector('.login-link');
+// Selectors
+const wrapper = document.getElementById('authWrapper');
+const loginSide = document.getElementById('loginSide');
+const registerSide = document.getElementById('registerSide');
 
-// Popup Open/Close
-btnPopup.onclick = () => { wrapper.classList.add('active-popup'); wrapper.classList.remove('active'); };
-iconClose.onclick = () => wrapper.classList.remove('active-popup');
+// UI Controls
+document.getElementById('openAuth').onclick = () => { wrapper.style.display = 'block'; showLogin(); };
+document.getElementById('closeAuth').onclick = () => wrapper.style.display = 'none';
 
-// Slide Toggle
-registerLink.onclick = () => wrapper.classList.add('active');
-loginLink.onclick = () => wrapper.classList.remove('active');
+function showLogin() { loginSide.style.display = 'block'; registerSide.style.display = 'none'; }
+function showRegister() { loginSide.style.display = 'none'; registerSide.style.display = 'block'; }
 
-// Firebase Registration Fix
+document.getElementById('showReg').onclick = (e) => { e.preventDefault(); showRegister(); };
+document.getElementById('showLog').onclick = (e) => { e.preventDefault(); showLogin(); };
+
+// Firebase Register
 document.getElementById('registerForm').onsubmit = async (e) => {
     e.preventDefault();
     const name = document.getElementById('regName').value;
@@ -40,26 +41,19 @@ document.getElementById('registerForm').onsubmit = async (e) => {
         const res = await createUserWithEmailAndPassword(auth, email, pass);
         await setDoc(doc(db, "users", res.user.uid), { username: name, email: email });
         
-        Swal.fire({ icon: 'success', title: 'Done!', text: 'Account Created. Switching to Login...', timer: 2000, showConfirmButton: false });
-
-        // YE RAHA FIX: Pehle form reset, phir 1.5s baad slide back
+        Swal.fire({ icon: 'success', title: 'Success!', text: 'Account Created. Login Now.', timer: 2000, showConfirmButton: false });
+        
         document.getElementById('registerForm').reset();
-        setTimeout(() => {
-            wrapper.classList.remove('active');
-        }, 1500);
-
-    } catch (err) { Swal.fire('Error', 'Failed!', 'error'); }
+        setTimeout(showLogin, 1500); // 100% switch back to login
+    } catch (err) { Swal.fire('Error', err.message, 'error'); }
 };
 
-// Login Logic
+// Firebase Login
 document.getElementById('loginForm').onsubmit = async (e) => {
     e.preventDefault();
-    const email = document.getElementById('logEmail').value;
-    const pass = document.getElementById('logPass').value;
-
     try {
-        await signInWithEmailAndPassword(auth, email, pass);
-        Swal.fire('Success', 'Logging in...', 'success');
+        await signInWithEmailAndPassword(auth, document.getElementById('logEmail').value, document.getElementById('logPass').value);
+        Swal.fire('Success', 'Redirecting...', 'success');
         setTimeout(() => { window.location.href = "portfolio.html"; }, 1500);
     } catch (err) { Swal.fire('Error', 'Wrong Credentials!', 'error'); }
 };
